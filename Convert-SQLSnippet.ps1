@@ -5,14 +5,14 @@ Function Get-SQLSnippet{
         Azure Data Studio.
 
     .DESCRIPTION
-        Takes an SSMS snippet file and produces a json strig which can be 
+        Takes an SSMS snippet file and produces a json string which can be 
         added (copied/pasted) to an Azure Data Studio snippet.
 
     .PARAMETER SourceFile
         The SSMS Snippet file to be converted.
 
     .EXAMPLE
-        PS C:\> Get-SQLSnippet "C:\Users\<username>\Documents\SQL Server Management Studio\Code Snippets\SQL\My Code Snippets\TryCatch.snippet"
+        PS C:\> Get-SQLSnippet "MySnippetFile.snippet"
 
     .NOTES
         Function Name: Get-SQLSnippet
@@ -51,7 +51,7 @@ Function Get-SQLSnippet{
     $splitCode = $rawCode -split $OFS
     $quotedCode = $splitCode | ForEach-Object {'"' + $_ + '",'}
 
-    # Remove superflous questions abd final comma
+    # Remove superflous quotations and final comma
     $oneLiner = [string]$quotedCode
     $oneLiner = $oneLiner.Substring(1,$oneLiner.Length-3)
 
@@ -85,7 +85,7 @@ Function Get-SQLSnippet{
         if($splitY[$i].IndexOf('"description":  "') -gt 0) {$descline = $i}
     }
 
-    # Add the requisite number of space to each line of code
+    # Add the requisite number of spaces to each line of code
     For ($i=4; $i -lt $descline -1; $i++) {
         [string]$splitY[$i] = $spacer + $splitY[$i]
     }
@@ -100,7 +100,7 @@ Function Get-SQLSnippet{
 Function Convert-SQLSnippet {
     <#
     .SYNOPSIS
-        Function to convert a target folder of SSMS snippet file into a single 
+        Function to convert a target folder of SSMS snippet files into a single 
         Azure Data Studio snippet file.
 
     .DESCRIPTION
