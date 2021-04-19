@@ -11,12 +11,12 @@ To load the functions into PowerShell, run the following from the directory that
 ```
 
 To run a conversion on a target directory containing .snippet files and produce a single consolidated ADS-compatible snippet file, run (for example):
-```
+```PowerShell
 Convert-SQLSnippet "C:\Users\<username>\Documents\SQL Server Management Studio\Code Snippets\SQL\My Code Snippets\" "C:\Users\<username>\AppData\Roaming\azuredatastudio\User\snippets\sql.json" 
 ```
 
 To run a conversion on a single file and return a json string of and ADS-compatible snippet, run (for example):
-```
+```PowerShell
 Get-SQLSnippet "MySnippetFile.snippet"
 ```
 
